@@ -39,13 +39,14 @@ void crearMatriz(){
 
 int main()
 {
-    bool userActive = true;
     int userx = 0, usery = 0;
     int casillaUser;
     
     crearMatriz();
-    cout << "Ingrese una casilla: ";
-    cin >> casillaUser;
+    cout << "Ingrese la fila: ";
+    cin >> userx;
+    cout << "Ingrese la columna: ";
+    cin >> usery;
 
     return 0;
 }
