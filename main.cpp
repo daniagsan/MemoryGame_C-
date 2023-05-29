@@ -1,1 +1,51 @@
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
 
+using namespace std;
+
+
+void crearMatriz(){
+
+    const int filas = 4;
+    const int columnas = 5;
+    const int totalPares = 10;
+    int matriz[filas][columnas] = {0};
+    int numero = 0;
+    int pares = 0;
+
+    //llenar arreglo
+    for(int i = 0; i < 5; i++){
+        for(int j = 0; j < 4; j++){
+            matriz[i][j] = numero;
+            pares++;
+            if(pares == 2){
+                numero++;
+                pares = 0;
+            }
+        }
+    }
+
+    int casilla = 1;
+    //imprimir arreglo
+    for(int i = 0; i < 5; i++){
+        for(int j = 0; j < 4; j++){
+            cout <<matriz[i][j]<<" ";
+            casilla++;
+        }
+        cout << endl;
+    }
+}
+
+int main()
+{
+    bool userActive = true;
+    int userx = 0, usery = 0;
+    int casillaUser;
+    
+    crearMatriz();
+    cout << "Ingrese una casilla: ";
+    cin >> casillaUser;
+
+    return 0;
+}
