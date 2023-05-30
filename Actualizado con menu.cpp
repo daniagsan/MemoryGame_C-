@@ -11,6 +11,7 @@ int numero = 0;
 int pares = 0;
 int parfound = 0;
 int numIgual = 0;
+int vueltax, vueltay;
 
 void crearMatriz(int userx, int usery){
 
@@ -72,23 +73,25 @@ void mostrarInstrucciones() {
 void juegoMatriz(int userx, int usery){
 
 
-    if(userx < 4 && usery < 5 && parfound == 0){
+    if(userx < 5 && usery < 4 && parfound == 0){
         cout<<"Usted a seleccionado el numero: "<<matriz[userx][usery]<<endl;
         parfound++;
-        numIgual = matriz[userx][usery];
-
 
     if(parfound == 1){
         cout<<"Ingrese otras coordenadas para encontrar el par!"<<endl<<endl;
-    }
+        numIgual = matriz[userx][usery];
 
-    if(matriz[userx][usery] == numIgual){
-        cout << "USTED HA ENCONTRADO UN PAR!";
+    //Revisar porque no salen estas dos validaciones
+    }else if(matriz[userx][usery] == numIgual){
+        cout << "USTED HA ENCONTRADO UN PAR!"<<endl;
+        numIgual = 10;
         parfound = 0;
+    }else if(matriz[userx][usery] != numIgual && parfound == 1){
+        cout <<"AQUÍ NO ESTÁ EL PAR!"<<endl;
     }
+    //hasta aquí
 
-
-    }else if(userx > 4 && usery > 5){
+    }else if(userx > 5 && usery > 4){
         cout <<"Ingrese coordenadas del 0 al 3 para la fila y del 0 al 4 para la columna"<<endl;
     }
 
@@ -106,9 +109,9 @@ int main()
 
     while(userState){
         imprimirMatriz();
-        cout << "Ingrese la fila: ";
-        cin >> userx;
         cout << "Ingrese la columna: ";
+        cin >> userx;
+        cout << "Ingrese la fila: ";
         cin >> usery;
 
         juegoMatriz(userx, usery);
