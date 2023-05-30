@@ -12,8 +12,7 @@ int pares = 0;
 
 void crearMatriz(int userx, int usery){
 
-
-    //llenar arreglo
+    // llenar arreglo
     for(int i = 0; i < 5; i++){
         for(int j = 0; j < 4; j++){
             matriz[i][j] = numero;
@@ -24,12 +23,22 @@ void crearMatriz(int userx, int usery){
             }
         }
     }
+
+    // mezclar matriz
+    srand(time(NULL));
+    int totalElementos = 5 * 4;
+    for(int i = totalElementos - 1; i > 0; i--){
+        int j = rand() % (i + 1);
+        int temp = matriz[i / 4][i % 4];
+        matriz[i / 4][i % 4] = matriz[j / 4][j % 4];
+        matriz[j / 4][j % 4] = temp;
+    }
 }
 
 void imprimirMatriz(){
     for(int i = 0; i < 5; i++){
         for(int j = 0; j < 4; j++){
-            cout <<matriz[i][j]<<" ";
+            cout << matriz[i][j] << " ";
         }
         cout << endl;
     }
@@ -52,6 +61,6 @@ int main()
         system("cls");
     }
 
-
     return 0;
 }
+
