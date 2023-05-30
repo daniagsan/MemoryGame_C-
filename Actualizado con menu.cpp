@@ -9,8 +9,11 @@ using namespace std;
 int matriz[5][4] = {0};
 int numero = 0;
 int pares = 0;
+int parfound = 0;
+int numIgual = 0;
 
 void crearMatriz(int userx, int usery){
+
     // llenar arreglo
     for(int i = 0; i < 5; i++){
         for(int j = 0; j < 4; j++){
@@ -24,7 +27,7 @@ void crearMatriz(int userx, int usery){
     }
 
     // mezclar matriz
-    srand(time(NULL));
+    srand(time(0));
     int totalElementos = 5 * 4;
     for(int i = totalElementos - 1; i > 0; i--){
         int j = rand() % (i + 1);
@@ -37,7 +40,7 @@ void crearMatriz(int userx, int usery){
 void imprimirMatriz(){
     for(int i = 0; i < 5; i++){
         for(int j = 0; j < 4; j++){
-            cout << matriz[i][j] << " ";
+            cout <<matriz[i][j] << " ";
         }
         cout << endl;
     }
@@ -66,6 +69,31 @@ void mostrarInstrucciones() {
     system("cls");
 }
 
+void juegoMatriz(int userx, int usery){
+
+
+    if(userx < 4 && usery < 5 && parfound == 0){
+        cout<<"Usted a seleccionado el numero: "<<matriz[userx][usery]<<endl;
+        parfound++;
+        numIgual = matriz[userx][usery];
+
+
+    if(parfound == 1){
+        cout<<"Ingrese otras coordenadas para encontrar el par!"<<endl<<endl;
+    }
+
+    if(matriz[userx][usery] == numIgual){
+        cout << "USTED HA ENCONTRADO UN PAR!";
+        parfound = 0;
+    }
+
+
+    }else if(userx > 4 && usery > 5){
+        cout <<"Ingrese coordenadas del 0 al 3 para la fila y del 0 al 4 para la columna"<<endl;
+    }
+
+}
+
 int main()
 {
     int userx = 0, usery = 0;
@@ -73,6 +101,7 @@ int main()
 
     mostrarPortada();
     mostrarInstrucciones();
+
     crearMatriz(userx, usery);
 
     while(userState){
@@ -82,11 +111,11 @@ int main()
         cout << "Ingrese la columna: ";
         cin >> usery;
 
+        juegoMatriz(userx, usery);
 
-
-
+        system("pause");
+        system("cls");
     }
 
     return 0;
 }
-
