@@ -12,6 +12,7 @@ int pares = 0;
 int parfound = 0;
 int numIgual = 0;
 int vueltax, vueltay;
+int puntaje = 0;
 
 void crearMatriz(int userx, int usery){
 
@@ -38,13 +39,21 @@ void crearMatriz(int userx, int usery){
     }
 }
 
-void imprimirMatriz(){
-    for(int i = 0; i < 5; i++){
+void imprimirMatriz(int userx, int usery, int vueltax, int vueltay, int numIgual, int parfound){
+    //Hacer que se impriman los asteriscos y se actualice el mapa 
+    //cuando se encuentre el par, que se muestren los dos numeros encontrados
+    //También debemos hacer que cuando seleccionemos un numero, se muestre
+       for(int i = 0; i < 5; i++){
         for(int j = 0; j < 4; j++){
-            cout <<matriz[i][j] << " ";
+            if(puntaje == 0){
+               cout <<" * ";
+            }else if(numIgual == matriz[userx][usery] && parfound == 2 && (vueltax != userx && vueltay != usery)){
+               cout <<matriz[i][j] << " ";
+            }
         }
         cout << endl;
     }
+
 }
 
 void mostrarPortada() {
@@ -73,23 +82,24 @@ void mostrarInstrucciones() {
 void juegoMatriz(int userx, int usery){
 
 
-    if(userx < 5 && usery < 4 && parfound == 0){
+    if(userx < 5 && usery < 4){
         cout<<"Usted a seleccionado el numero: "<<matriz[userx][usery]<<endl;
         parfound++;
 
     if(parfound == 1){
         cout<<"Ingrese otras coordenadas para encontrar el par!"<<endl<<endl;
         numIgual = matriz[userx][usery];
+        vueltax = userx;
+        vueltay = usery;
 
-    //Revisar porque no salen estas dos validaciones
-    }else if(matriz[userx][usery] == numIgual){
+    }else if(numIgual == matriz[userx][usery] && parfound == 2 && (vueltax != userx && vueltay != usery)){
         cout << "USTED HA ENCONTRADO UN PAR!"<<endl;
         numIgual = 10;
         parfound = 0;
-    }else if(matriz[userx][usery] != numIgual && parfound == 1){
-        cout <<"AQUÍ NO ESTÁ EL PAR!"<<endl;
+    }else if(matriz[userx][usery] != numIgual && parfound == 2){
+        cout <<"AQUI NO ESTA EL PAR!"<<endl;
+        parfound = 0;
     }
-    //hasta aquí
 
     }else if(userx > 5 && usery > 4){
         cout <<"Ingrese coordenadas del 0 al 3 para la fila y del 0 al 4 para la columna"<<endl;
@@ -108,7 +118,7 @@ int main()
     crearMatriz(userx, usery);
 
     while(userState){
-        imprimirMatriz();
+        imprimirMatriz(userx, usery, vueltax, vueltay, numIgual, parfound);
         cout << "Ingrese la columna: ";
         cin >> userx;
         cout << "Ingrese la fila: ";
