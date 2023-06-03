@@ -200,8 +200,8 @@ int main()
 
         if (paresEncontrados == (FILAS * COLUMNAS) / 2)
         {
-            cout << "¡Felicidades! ¡Has encontrado todos los pares! " << endl;
-                string indent = "                                        ";
+            
+                string indent = "                                         ";
                 cout << indent << "       \\`\"-. " << endl;
                 cout << indent << "        )  _`-. " << endl;
                 cout << indent << "       ,  : `. \\ " << endl;
@@ -216,6 +216,7 @@ int main()
                 cout << indent << "         ; /   : |`-:     _ `- ) " << endl;
                 cout << indent << "      ,-' /  ,-' ; .-`- .' `--' " << endl;
                 cout << indent << "      `--'   `---' `---' " << endl;
+            cout << "¡Felicidades! ¡Has encontrado todos los pares! " << endl;
             juegoTerminado = true;
         }
     }
