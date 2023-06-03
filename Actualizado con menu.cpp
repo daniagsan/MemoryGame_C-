@@ -96,7 +96,6 @@ void mostrarPortada()
     cin.ignore();
 }
 
-
 void mostrarInstrucciones()
 {
     srand(time(0));
@@ -108,13 +107,11 @@ void mostrarInstrucciones()
 
     system("cls");
 
-
-
     cout << "=================================================================================" << endl;
     cout << "                                   Instrucciones                                 " << endl;
     cout << "=================================================================================" << endl;
 
-    SetConsoleTextAttribute(hConsole, 15);
+    SetConsoleTextAttribute(hConsole, 15); //Color
     cout << "El objetivo del juego es encontrar todos los pares de números.                   " << endl;
     cout << "En cada turno, selecciona una posición en la matriz ingresando su fila y columna." << endl;
     cout << "Se revelará el número en esa posición.                                           " << endl;
@@ -179,6 +176,9 @@ int main()
     setlocale(LC_ALL, "");
     int fila = 0, columna = 0;
     bool juegoTerminado = false;
+    int intentos = 0;
+    int intentosRestantes = 25;
+    int paresRestantes = (FILAS * COLUMNAS) / 2;
 
     mostrarPortada();
     mostrarInstrucciones();
@@ -188,6 +188,9 @@ int main()
     while (!juegoTerminado)
     {
         imprimirMatriz();
+
+        cout << "Intentos realizados: " << intentos << " // Vidas: " << intentosRestantes << endl;
+        cout << "Pares restantes: " << paresRestantes << endl;
         cout << "Ingrese la fila: ";
         cin >> fila;
         cout << "Ingrese la columna: ";
@@ -195,32 +198,62 @@ int main()
 
         juegoMatriz(fila, columna);
 
+        intentos++;
+        intentosRestantes--;
+        paresRestantes = (FILAS * COLUMNAS) / 2 - paresEncontrados;
+
         system("pause");
         system("cls");
 
         if (paresEncontrados == (FILAS * COLUMNAS) / 2)
         {
-            
-                string indent = "                                         ";
-                cout << indent << "       \\`\"-. " << endl;
-                cout << indent << "        )  _`-. " << endl;
-                cout << indent << "       ,  : `. \\ " << endl;
-                cout << indent << "       : _   '  \\ " << endl;
-                cout << indent << "       ; *` _.   `--._ " << endl;
-                cout << indent << "       `-.-'          `-. " << endl;
-                cout << indent << "         |       `       `. " << endl;
-                cout << indent << "         :.       .        \\ " << endl;
-                cout << indent << "         | \\  .   :   .-'   . " << endl;
-                cout << indent << "         :  )-.;  ;  /      : " << endl;
-                cout << indent << "         :  ;  | :  :       ;-. " << endl;
-                cout << indent << "         ; /   : |`-:     _ `- ) " << endl;
-                cout << indent << "      ,-' /  ,-' ; .-`- .' `--' " << endl;
-                cout << indent << "      `--'   `---' `---' " << endl;
+            //Mensaje de Ganador
+            string indent = "                                         ";
+            cout << indent << "       \\`\"-. " << endl;
+            cout << indent << "        )  _`-. " << endl;
+            cout << indent << "       ,  : `. \\ " << endl;
+            cout << indent << "       : _   '  \\ " << endl;
+            cout << indent << "       ; *` _.   `--._ " << endl;
+            cout << indent << "       `-.-'          `-. " << endl;
+            cout << indent << "         |       `       `. " << endl;
+            cout << indent << "         :.       .        \\ " << endl;
+            cout << indent << "         | \\  .   :   .-'   . " << endl;
+            cout << indent << "         :  )-.;  ;  /      : " << endl;
+            cout << indent << "         :  ;  | :  :       ;-. " << endl;
+            cout << indent << "         ; /   : |`-:     _ `- ) " << endl;
+            cout << indent << "      ,-' /  ,-' ; .-`- .' `--' " << endl;
+            cout << indent << "      `--'   `---' `---' " << endl;
             cout << "¡Felicidades! ¡Has encontrado todos los pares! " << endl;
+
+            cout << "Número de intentos: " << intentos << endl;
+            juegoTerminado = true;
+        }
+        else if (intentosRestantes == 0)
+        {
+            //Mensaje de Perdedor
+            string asciiArt = R"(
+                     _ _
+                     .'  '.
+                 _.-'/  |  \
+    ,        _.-"  ,|  /  0 `-.
+    |\    .-"       `--""-.__.'=====================-,
+    \ '-'`        .___.--._)=========================|
+     \            .'      |       -GAME OVER-        |
+      |     /,_.-'        |                          |
+    _/   _.'(             |          MEJOR           |
+   /  ,-' \  \            |    SUERTE LA PROXIMA     |
+   \  \    `-'            |           VEZ            |
+    `-'                   '--------------------------'
+)";
+
+            cout << asciiArt;
+
+            cout << "Lo siento, has alcanzado el número máximo de intentos." << endl;
             juegoTerminado = true;
         }
     }
 
     return 0;
 }
+
 
