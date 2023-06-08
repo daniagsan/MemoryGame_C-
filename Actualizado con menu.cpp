@@ -150,7 +150,7 @@ void juegoMatriz(int fila, int columna)
                     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
                     int color = matriz[fila][columna] % 15 + 1;
                     SetConsoleTextAttribute(hConsole, color);
-                    cout << "¡Has encontrado un par! Los números son iguales." << endl;
+                    cout << "¡Has encontrado un par! Los números son iguales." << endl << endl;
                     SetConsoleTextAttribute(hConsole, 15);
                     paresEncontrados++;
                 }
@@ -158,7 +158,7 @@ void juegoMatriz(int fila, int columna)
                 {
                     revelado[fila][columna] = false;
                     revelado[numAnteriorFila][numAnteriorColumna] = false;
-                    cout << "Los números no son iguales. Inténtalo de nuevo." << endl;
+                    cout << "Los números no son iguales. Inténtalo de nuevo." << endl << endl;
                 }
                 numAnteriorFila = -1;
                 numAnteriorColumna = -1;
@@ -195,6 +195,7 @@ int main()
         cin >> fila;
         cout << "Ingrese la columna: ";
         cin >> columna;
+        cout << endl;
 
         juegoMatriz(fila, columna);
 
@@ -249,11 +250,14 @@ int main()
             cout << asciiArt;
 
             cout << "Lo siento, has alcanzado el número máximo de intentos." << endl;
-            juegoTerminado = true;
+            intentosRestantes = 25;
+            intentos = 0;
+            juegoTerminado = false;
+            system("pause");
+            system("cls");
         }
     }
 
     return 0;
 }
-
 
